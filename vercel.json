@@ -1,44 +1,8 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/scan",
-      "dest": "/api/scan.js"
-    },
-    {
-      "src": "/api/regime",
-      "dest": "/api/regime.js"
-    },
-    {
-      "src": "/api/health",
-      "dest": "/api/health.js"
-    },
-    {
-      "src": "/api/stock/(.+)",
-      "dest": "/api/stock/[symbol].js?symbol=$1"
-    },
-    {
-      "src": "/api/news/(.+)",
-      "dest": "/api/news/[symbol].js?symbol=$1"
-    },
-    {
-      "src": "/api/history",
-      "dest": "/api/history/index.js"
-    },
-    {
-      "src": "/api/portfolio",
-      "dest": "/api/portfolio/index.js"
-    },
-    {
-      "src": "/api/watchlist",
-      "dest": "/api/watchlist/index.js"
-    }
+  "rewrites": [
+    { "source": "/api/stock/:symbol", "destination": "/api/stock/[symbol]" },
+    { "source": "/api/news/:symbol", "destination": "/api/news/[symbol]" }
   ],
   "functions": {
     "api/scan.js": {
