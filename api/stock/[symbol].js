@@ -98,12 +98,19 @@ module.exports = async function handler(req, res) {
       };
     }
 
+    // Build chart OHLCV data for frontend charting
+    const chartData = (stockData.ohlcv || []).map(d => ({
+      t: d.t, o: parseFloat(d.o.toFixed(2)), h: parseFloat(d.h.toFixed(2)),
+      l: parseFloat(d.l.toFixed(2)), c: parseFloat(d.c.toFixed(2)), v: d.v
+    }));
+
     return res.status(200).json({
       success: true,
       symbol: sym,
       name,
       sector,
       regime: regimeData,
+      chart: chartData,
       score: {
         total: scored.totalScore,
         technical: scored.techScore,
