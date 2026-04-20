@@ -54,7 +54,7 @@ module.exports = async function handler(req, res) {
     // Score
     stockData.sector = sector;
     const scored = scoreStock(stockData, nifty60dHistory);
-    const signal = getSignal(scored.totalScore, scored.beta, regime);
+    const signal = getSignal(scored.totalScore, scored.beta, regime, scored.gatesPassed);
     const resilience = getResilienceLabel(scored.resilienceScore);
     const defensiveScore = Math.round(scored.totalScore * 0.5 + scored.resilienceScore * 0.5);
 
@@ -149,8 +149,10 @@ module.exports = async function handler(req, res) {
       relativeStrength: parseFloat(scored.relativeStrength.toFixed(2)),
       trendBreak: scored.trendBreak,
       bbPos: parseFloat((scored.bbPos * 100).toFixed(0)),
+      gatesPassed: scored.gatesPassed,
       reasons: scored.reasons,
       steps: scored.steps,
+      btst: scored.btst,
       fundamentals: fundData
     });
   } catch (err) {
