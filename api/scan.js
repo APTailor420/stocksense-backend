@@ -64,7 +64,7 @@ module.exports = async function handler(req, res) {
 
             data.sector = stock.sec;
             const scored = scoreStock(data, nifty60dHistory);
-            const signal = getSignal(scored.totalScore, scored.beta, regime);
+            const signal = getSignal(scored.totalScore, scored.beta, regime, scored.gatesPassed);
             const resilience = getResilienceLabel(scored.resilienceScore);
 
             // Compute defensive score: 50% original + 50% resilience
@@ -80,6 +80,7 @@ module.exports = async function handler(req, res) {
               techScore: scored.techScore,
               momScore: scored.momScore,
               defensiveScore,
+              gatesPassed: scored.gatesPassed,
               signal: signal.label,
               signalKey: signal.key,
               signalEmoji: signal.emoji,
@@ -102,7 +103,9 @@ module.exports = async function handler(req, res) {
               w52pos: scored.w52pos,
               relativeStrength: parseFloat(scored.relativeStrength.toFixed(2)),
               reasons: scored.reasons,
-              steps: scored.steps
+              steps: scored.steps,
+              trendBreak: scored.trendBreak?.breakout || 'none',
+              btst: scored.btst
             };
           } catch (err) {
             errors.push({ symbol: stock.s, error: err.message });
