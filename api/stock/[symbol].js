@@ -1,10 +1,10 @@
 // ================================================================
-// GET /api/stock/:symbol — Single stock deep analysis
-// Returns full scoring breakdown with all 9 analysis steps
+// GET /api/stock/:symbol — Single stock deep analysis (v6)
+// Returns full scoring breakdown with freshness detection
 // ================================================================
 
 const { UNIVERSE } = require('../../lib/universe');
-const { fetchStock, fetchFundamentals, fetchMarketData } = require('../../lib/yahoo');
+const { fetchStock, fetchFundamentals, fetchMarketData, fetchMultiSourceNews } = require('../../lib/yahoo');
 const { scoreStock, getSignal } = require('../../lib/scoring');
 const { computeMarketRegime } = require('../../lib/regime');
 const { getResilienceLabel } = require('../../lib/indicators');
@@ -33,11 +33,12 @@ module.exports = async function handler(req, res) {
     const sector = stockInfo?.sec || 'Unknown';
     const name = stockInfo?.n || sym;
 
-    // Fetch stock data + market data in parallel
-    const [stockData, marketData, fundamentals] = await Promise.all([
+    // Fetch stock data + market data + fundamentals + multi-source news in parallel
+    const [stockData, marketData, fundamentals, newsData] = await Promise.all([
       fetchStock(sym),
       fetchMarketData(),
-      fetchFundamentals(sym)
+      fetchFundamentals(sym),
+      fetchMultiSourceNews(sym, name)
     ]);
 
     if (!stockData) {
@@ -51,10 +52,10 @@ module.exports = async function handler(req, res) {
       ? marketData.closes.slice(Math.max(0, marketData.closes.length - 60))
       : null;
 
-    // Score
+    // Score with v6 freshness detection
     stockData.sector = sector;
     const scored = scoreStock(stockData, nifty60dHistory);
-    const signal = getSignal(scored.totalScore, scored.beta, regime, scored.gatesPassed);
+    const signal = getSignal(scored.totalScore, scored.beta, regime, scored.gatesPassed, scored.freshGatesPassed);
     const resilience = getResilienceLabel(scored.resilienceScore);
     const defensiveScore = Math.round(scored.totalScore * 0.5 + scored.resilienceScore * 0.5);
 
@@ -128,6 +129,13 @@ module.exports = async function handler(req, res) {
         label: resilience.label,
         emoji: resilience.emoji
       },
+      // v6 freshness data
+      gatesPassed: scored.gatesPassed,
+      freshGatesPassed: scored.freshGatesPassed,
+      freshness: scored.freshness,
+      sustainScore: scored.sustainScore,
+      sustainReasons: scored.sustainReasons,
+      // Standard fields
       price: scored.price,
       change: parseFloat(scored.change.toFixed(2)),
       beta: parseFloat(scored.beta.toFixed(2)),
@@ -149,10 +157,11 @@ module.exports = async function handler(req, res) {
       relativeStrength: parseFloat(scored.relativeStrength.toFixed(2)),
       trendBreak: scored.trendBreak,
       bbPos: parseFloat((scored.bbPos * 100).toFixed(0)),
-      gatesPassed: scored.gatesPassed,
       reasons: scored.reasons,
       steps: scored.steps,
       btst: scored.btst,
+      // v6 multi-source news with catalyst scoring
+      newsIntel: newsData,
       fundamentals: fundData
     });
   } catch (err) {
