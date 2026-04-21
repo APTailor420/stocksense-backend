@@ -1,6 +1,6 @@
 // ================================================================
-// POST /api/scan — Full universe scan (the core endpoint)
-// Scans all 150+ stocks, scores them, classifies signals,
+// POST /api/scan — Full universe scan (v6: Fresh Crossover Edition)
+// Scans all 150+ stocks, scores with freshness detection,
 // detects market regime, saves to MongoDB, returns ranked results.
 // ================================================================
 
@@ -64,7 +64,7 @@ module.exports = async function handler(req, res) {
 
             data.sector = stock.sec;
             const scored = scoreStock(data, nifty60dHistory);
-            const signal = getSignal(scored.totalScore, scored.beta, regime, scored.gatesPassed);
+            const signal = getSignal(scored.totalScore, scored.beta, regime, scored.gatesPassed, scored.freshGatesPassed);
             const resilience = getResilienceLabel(scored.resilienceScore);
 
             // Compute defensive score: 50% original + 50% resilience
@@ -81,6 +81,9 @@ module.exports = async function handler(req, res) {
               momScore: scored.momScore,
               defensiveScore,
               gatesPassed: scored.gatesPassed,
+              freshGatesPassed: scored.freshGatesPassed,
+              sustainScore: scored.sustainScore,
+              freshness: scored.freshness,
               signal: signal.label,
               signalKey: signal.key,
               signalEmoji: signal.emoji,
@@ -124,9 +127,13 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    // Step 4: Sort results
-    const sortKey = portfolioMode === 'defensive' ? 'defensiveScore' : 'totalScore';
-    results.sort((a, b) => b[sortKey] - a[sortKey]);
+    // Step 4: Sort results — v6 prioritizes freshness
+    results.sort((a, b) => {
+      // First sort by fresh gates, then by total score
+      if (b.freshGatesPassed !== a.freshGatesPassed) return b.freshGatesPassed - a.freshGatesPassed;
+      const sortKey = portfolioMode === 'defensive' ? 'defensiveScore' : 'totalScore';
+      return b[sortKey] - a[sortKey];
+    });
 
     // Step 5: Save scan to MongoDB
     let scanId = null;
