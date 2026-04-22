@@ -159,7 +159,6 @@ module.exports = async function handler(req, res) {
       bbPos: parseFloat((scored.bbPos * 100).toFixed(0)),
       reasons: scored.reasons,
       steps: scored.steps,
-      btst: scored.btst,
       // v6 multi-source news with catalyst scoring
       newsIntel: newsData,
       fundamentals: fundData
