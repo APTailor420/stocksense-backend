@@ -107,8 +107,7 @@ module.exports = async function handler(req, res) {
               relativeStrength: parseFloat(scored.relativeStrength.toFixed(2)),
               reasons: scored.reasons,
               steps: scored.steps,
-              trendBreak: scored.trendBreak?.breakout || 'none',
-              btst: scored.btst
+              trendBreak: scored.trendBreak?.breakout || 'none'
             };
           } catch (err) {
             errors.push({ symbol: stock.s, error: err.message });
@@ -127,10 +126,8 @@ module.exports = async function handler(req, res) {
       }
     }
 
-    // Step 4: Sort results — v6 prioritizes freshness
+    // Step 4: Sort results by score (v3/v4 style — simple score-based ranking)
     results.sort((a, b) => {
-      // First sort by fresh gates, then by total score
-      if (b.freshGatesPassed !== a.freshGatesPassed) return b.freshGatesPassed - a.freshGatesPassed;
       const sortKey = portfolioMode === 'defensive' ? 'defensiveScore' : 'totalScore';
       return b[sortKey] - a[sortKey];
     });
