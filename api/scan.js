@@ -1,6 +1,6 @@
 // ================================================================
 // POST /api/scan — Full universe scan (v6: Fresh Crossover Edition)
-// Scans all 150+ stocks, scores with freshness detection,
+// Scans all 150+ stocks, scores with v3/v4 additive scoring,
 // detects market regime, saves to MongoDB, returns ranked results.
 // ================================================================
 
@@ -64,7 +64,7 @@ module.exports = async function handler(req, res) {
 
             data.sector = stock.sec;
             const scored = scoreStock(data, nifty60dHistory);
-            const signal = getSignal(scored.totalScore, scored.beta, regime, scored.gatesPassed, scored.freshGatesPassed);
+            const signal = getSignal(scored.totalScore, scored.beta, regime);
             const resilience = getResilienceLabel(scored.resilienceScore);
 
             // Compute defensive score: 50% original + 50% resilience
@@ -80,10 +80,6 @@ module.exports = async function handler(req, res) {
               techScore: scored.techScore,
               momScore: scored.momScore,
               defensiveScore,
-              gatesPassed: scored.gatesPassed,
-              freshGatesPassed: scored.freshGatesPassed,
-              sustainScore: scored.sustainScore,
-              freshness: scored.freshness,
               signal: signal.label,
               signalKey: signal.key,
               signalEmoji: signal.emoji,
