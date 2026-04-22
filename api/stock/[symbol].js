@@ -1,6 +1,6 @@
 // ================================================================
 // GET /api/stock/:symbol — Single stock deep analysis (v6)
-// Returns full scoring breakdown with freshness detection
+// Returns full scoring breakdown with v3/v4 additive scoring
 // ================================================================
 
 const { UNIVERSE } = require('../../lib/universe');
@@ -52,10 +52,10 @@ module.exports = async function handler(req, res) {
       ? marketData.closes.slice(Math.max(0, marketData.closes.length - 60))
       : null;
 
-    // Score with v6 freshness detection
+    // Score with v3/v4 additive scoring
     stockData.sector = sector;
     const scored = scoreStock(stockData, nifty60dHistory);
-    const signal = getSignal(scored.totalScore, scored.beta, regime, scored.gatesPassed, scored.freshGatesPassed);
+    const signal = getSignal(scored.totalScore, scored.beta, regime);
     const resilience = getResilienceLabel(scored.resilienceScore);
     const defensiveScore = Math.round(scored.totalScore * 0.5 + scored.resilienceScore * 0.5);
 
@@ -129,12 +129,6 @@ module.exports = async function handler(req, res) {
         label: resilience.label,
         emoji: resilience.emoji
       },
-      // v6 freshness data
-      gatesPassed: scored.gatesPassed,
-      freshGatesPassed: scored.freshGatesPassed,
-      freshness: scored.freshness,
-      sustainScore: scored.sustainScore,
-      sustainReasons: scored.sustainReasons,
       // Standard fields
       price: scored.price,
       change: parseFloat(scored.change.toFixed(2)),
