@@ -1,0 +1,13 @@
+{
+  "name": "ClaudeNiftyScan",
+  "short_name": "CNScan",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060c18",
+  "theme_color": "#060c18",
+  "icons": [
+    { "src": "/assets/favicon-32.svg", "sizes": "32x32", "type": "image/svg+xml" },
+    { "src": "/assets/favicon-16.svg", "sizes": "16x16", "type": "image/svg+xml" },
+    { "src": "/assets/apple-touch-icon.svg", "sizes": "180x180", "type": "image/svg+xml" }
+  ]
+}
