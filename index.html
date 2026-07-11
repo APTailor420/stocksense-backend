@@ -1438,12 +1438,15 @@ function switchPortfolio(portfolio){
 function renderRadar(){
   const scoreKey=activePortfolio==='defensive'?'defensiveScore':'score';
   // Top picks: score >= 63 AND signal is Strong Buy or Buy
-  let picks=allResults.filter(r=>r[scoreKey]>=63&&(r.signal.key==='strong-buy'||r.signal.key==='buy'))
-    .sort((a,b)=>b[scoreKey]-a[scoreKey]).slice(0,8);
+  let picks=allResults.filter(r=>r[scoreKey]>=63&&(r.signal.key==='strong-buy'||r.signal.key==='buy'));
+  // DMA filter ON: Top Picks must ALSO be fresh crossers (1st close above 100/200 DMA)
+  if(dmaCrossOnly)picks=picks.filter(r=>r.scored&&(r.scored.crossed100||r.scored.crossed200));
+  picks=picks.sort((a,b)=>b[scoreKey]-a[scoreKey]).slice(0,8);
   const wrap=document.getElementById('radarScroll');
   if(!picks.length){document.getElementById('radarSection').style.display='none';return;}
   document.getElementById('radarSection').style.display='block';
   document.getElementById('radarCount').textContent=picks.length+' pick'+(picks.length!==1?'s':'');
+  document.getElementById('radarTitle').textContent=dmaCrossOnly?'🔥 Fresh 100/200 DMA Crossovers — 1st Close Above the Line':'📈 Top Picks — Best Stocks for Next 1 Week';
 
   wrap.innerHTML=picks.map((r,i)=>{
     const clr=r.change>=0?'var(--green)':'var(--red)';
