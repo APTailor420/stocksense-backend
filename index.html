@@ -1483,7 +1483,7 @@ function renderTable(){
   let data=[...allResults];
   if(activeSector!=='All')data=data.filter(r=>r.sector===activeSector);
   if(activeSignal!=='all')data=data.filter(r=>r.signal.key===activeSignal);
-  if(dmaCrossOnly)data=data.filter(r=>r.scored&&(r.scored.crossed100||r.scored.crossed200));
+  if(dmaCrossOnly)data=data.filter(r=>r.scored&&(r.scored.crossed100||r.scored.crossed200)&&(r.signal.key==='strong-buy'||r.signal.key==='buy'));
   const scoreKey=activePortfolio==='defensive'?'defensiveScore':'score';
   data.sort((a,b)=>{
     if(sortCfg.col==='score'){return sortCfg.asc?a[scoreKey]-b[scoreKey]:b[scoreKey]-a[scoreKey];}
@@ -1505,7 +1505,7 @@ function renderTable(){
       <td class="${r.scored.vwapAbove?'pos':'neg'}">${r.scored.vwapAbove?'Above':'Below'}</td>
       <td>₹${fmt(r.support)}</td>
       <td>₹${fmt(r.resistance)}</td>
-      <td class="${r.scored&&(r.scored.crossed100||r.scored.crossed200)?'pos':''}">${r.scored&&r.scored.crossed100&&r.scored.crossed200?'🔥 Both!':r.scored&&r.scored.crossed200?'🔥 200 DMA':r.scored&&r.scored.crossed100?'✅ 100 DMA':r.scored&&r.scored.above100&&r.scored.above200?'⏳ Above Both':r.scored&&r.scored.above200?'▲ >200':r.scored&&r.scored.above100?'▲ >100':'▼ Below'}</td>
+      <td class="${r.scored&&(r.scored.crossed100||r.scored.crossed200)?'pos':''}">${r.scored&&r.scored.crossed100&&r.scored.crossed200?'🔥 1st close >100+200 DMA':r.scored&&r.scored.crossed200?'🔥 1st close >200 DMA':r.scored&&r.scored.crossed100?'✅ 1st close >100 DMA':r.scored&&r.scored.above100&&r.scored.above200?'⏳ Above Both':r.scored&&r.scored.above200?'▲ >200':r.scored&&r.scored.above100?'▲ >100':'▼ Below'}</td>
       <td style="display:none;@media(max-width:1000px){display:none;}">${fmt(r.beta,2)}</td>
       <td style="display:none;@media(max-width:1000px){display:none;}" class="${r.relativeStrength>=0?'pos':'neg'}">${r.relativeStrength>=0?'+':''}${fmt(r.relativeStrength,1)}%</td>
       <td style="display:none;@media(max-width:1000px){display:none;}">₹${fmt(r.scored.trailingStop)} <span style="font-size:9px;color:var(--muted)">${fmt(r.scored.trailingStopPct,1)}%</span></td>
@@ -1519,7 +1519,7 @@ function filterSec(el){document.querySelectorAll('.controls .btn-sec:not(#dmaCro
 function filterSig(el){document.querySelectorAll('.table-filters .btn-sm').forEach(b=>b.classList.remove('active'));el.classList.add('active');activeSignal=el.dataset.sig;renderTable();}
 function toggleDMACrossFilter(el){
   dmaCrossOnly=!dmaCrossOnly;
-  if(dmaCrossOnly){el.style.background='rgba(16,185,129,.25)';el.style.borderColor='#10b981';el.style.color='#10b981';el.textContent='🔥 DMA Cross Filter: ON';}
+  if(dmaCrossOnly){el.style.background='rgba(16,185,129,.25)';el.style.borderColor='#10b981';el.style.color='#10b981';el.textContent='🔥 Fresh DMA Cross + Buyable: ON';}
   else{el.style.background='rgba(16,185,129,.08)';el.style.borderColor='rgba(16,185,129,.3)';el.style.color='#10b981';el.textContent='🔥 Crossed 100/200 DMA Only';}
   renderTable();renderRadar();
 }
