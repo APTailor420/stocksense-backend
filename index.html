@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NiftyScan 500 — AI-Built Nifty 100 Stock Screener | Buy & Avoid Signals</title>
-<meta name="description" content="NiftyScan 500 scans all Nifty 100 stocks with RSI, MACD, SuperTrend, VWAP, fresh 100/200 DMA crossovers, chart patterns and support/resistance to give clear Buy, Hold or Avoid signals for 1-week swing trades. Free NSE stock screener, built with Claude AI.">
-<meta name="keywords" content="NiftyScan 500, Nifty 100 screener, NSE stock screener, swing trading India, 200 DMA crossover stocks, buy signal stocks, AI stock scanner India">
+<title>NiftyScan 100 — AI-Built Nifty 100 Stock Screener | Buy & Avoid Signals</title>
+<meta name="description" content="NiftyScan 100 scans all Nifty 100 stocks with RSI, MACD, SuperTrend, VWAP, fresh 100/200 DMA crossovers, chart patterns and support/resistance to give clear Buy, Hold or Avoid signals for 1-week swing trades. Free NSE stock screener, built with Claude AI.">
+<meta name="keywords" content="NiftyScan 100, Nifty 100 screener, NSE stock screener, swing trading India, 200 DMA crossover stocks, buy signal stocks, AI stock scanner India">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://niftyscan500.vercel.app/">
-<meta property="og:title" content="NiftyScan 500 — AI-Built Nifty 100 Stock Screener">
+<meta property="og:title" content="NiftyScan 100 — AI-Built Nifty 100 Stock Screener">
 <meta property="og:description" content="Scans Nifty 100 stocks on every technical parameter and gives clear Buy / Hold / Avoid signals for 1-week holds. Free to use.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://niftyscan500.vercel.app/">
 <meta name="twitter:card" content="summary">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"NiftyScan 500","url":"https://niftyscan500.vercel.app/","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"description":"AI-built stock screener that scans all Nifty 100 stocks using technical indicators and gives Buy, Hold or Avoid signals for 1-week swing trades."}
+{"@context":"https://schema.org","@type":"WebApplication","name":"NiftyScan 100","url":"https://niftyscan500.vercel.app/","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"description":"AI-built stock screener that scans all Nifty 100 stocks using technical indicators and gives Buy, Hold or Avoid signals for 1-week swing trades."}
 </script>
 <meta name="theme-color" content="#060c18">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -285,7 +285,7 @@ html{-webkit-text-size-adjust:100%;}
 <body>
 
 <header>
-  <div class="logo">📈 NiftyScan 500 <span style="font-size:10px;color:var(--purple);font-weight:600;border:1px solid var(--border);border-radius:10px;padding:1px 7px;white-space:nowrap;">✦ Built with Claude AI</span></div>
+  <div class="logo">📈 NiftyScan 100 <span style="font-size:10px;color:var(--purple);font-weight:600;border:1px solid var(--border);border-radius:10px;padding:1px 7px;white-space:nowrap;">✦ Built with Claude AI</span></div>
   <div class="header-sub">AI-built NSE Stock Screener · Technical Analysis · Buy / Avoid Signals · Nifty 100 · 1-Week Swing</div>
   <div class="sources">
     Data: <span class="src-b src-on">Yahoo Finance v8</span>
@@ -1026,22 +1026,10 @@ function scoreStock(data){
   let barsAbove100=0, barsAbove200=0;
   if(l100){for(let ci=n-1;ci>=0;ci--){if(sma100[ci]!=null&&closes[ci]>sma100[ci])barsAbove100++;else break;}}
   if(l200){for(let ci=n-1;ci>=0;ci--){if(sma200[ci]!=null&&closes[ci]>sma200[ci])barsAbove200++;else break;}}
-  // FRESH cross = price closed above the MA only in the last 1-2 candles (catch it early).
-  // If the stock already has 3+ daily closes above the MA, the move is extended — NOT a fresh entry.
-  if(l100&&n>=3){
-    for(let ci=Math.max(1,n-2);ci<n;ci++){
-      const prevSma=sma100[ci-1];
-      if(prevSma&&closes[ci-1]<prevSma&&closes[ci]>=sma100[ci]){crossed100=true;break;}
-    }
-  }
-  if(l200&&n>=3){
-    for(let ci=Math.max(1,n-2);ci<n;ci++){
-      const prevSma=sma200[ci-1];
-      if(prevSma&&closes[ci-1]<prevSma&&closes[ci]>=sma200[ci]){crossed200=true;break;}
-    }
-  }
-  crossed100=crossed100&&barsAbove100<=2;
-  crossed200=crossed200&&barsAbove200<=2;
+  // STRICT FRESH cross = ONLY the latest daily candle closed above the MA (barsAbove === 1).
+  // 2+ candles already above = move already started = NOT fresh, excluded from the filter.
+  crossed100=(barsAbove100===1);
+  crossed200=(barsAbove200===1);
   // Score: big points ONLY for fresh crosses (recently closed above). Already-extended
   // stocks (3+ candles above) get just a small trend acknowledgment, not a buy push.
   if(above100){techScore+=(crossed100?10:3);}else{techScore-=10;}
@@ -1314,7 +1302,7 @@ async function startScan(){
         resilienceScore:r.resilienceScore,trailingStop:r.trailingStop,trailingStopPct:r.trailingStopPct,
         reasons:r.reasons||[],steps:r.steps||[],
         trendBreak:{breakout:r.trendBreak||'none'},
-        crossed100:false,crossed200:false,above100:r.vs50>0,above200:r.vs200>0
+        crossed100:!!r.crossed100,crossed200:!!r.crossed200,above100:r.vs50>0,above200:r.vs200>0
       };
       allResults.push({
         symbol:sym,name:r.name,sector:r.sector,
@@ -1495,7 +1483,7 @@ function renderTable(){
   let data=[...allResults];
   if(activeSector!=='All')data=data.filter(r=>r.sector===activeSector);
   if(activeSignal!=='all')data=data.filter(r=>r.signal.key===activeSignal);
-  if(dmaCrossOnly)data=data.filter(r=>r.scored&&(r.scored.above100||r.scored.above200));
+  if(dmaCrossOnly)data=data.filter(r=>r.scored&&(r.scored.crossed100||r.scored.crossed200));
   const scoreKey=activePortfolio==='defensive'?'defensiveScore':'score';
   data.sort((a,b)=>{
     if(sortCfg.col==='score'){return sortCfg.asc?a[scoreKey]-b[scoreKey]:b[scoreKey]-a[scoreKey];}
