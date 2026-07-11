@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> claudeniftyscan— AI-Built Nifty 500 Stock Screener | Buy & Avoid Signals</title>
-<meta name="description" content="claudeniftyscan scans all Nifty 500 stocks with RSI, MACD, SuperTrend, VWAP, fresh 100/200 DMA crossovers, chart patterns and support/resistance to give clear Buy, Hold or Avoid signals for 4-week swing trades. Free NSE stock screener, built with Claude AI.">
-<meta name="keywords" content="NiftyScan 500, Nifty 500 screener, NSE stock screener, swing trading India, 200 DMA crossover stocks, buy signal stocks, AI stock scanner India">
+<title>NiftyScan 500 — AI-Built Nifty 100 Stock Screener | Buy & Avoid Signals</title>
+<meta name="description" content="NiftyScan 500 scans all Nifty 100 stocks with RSI, MACD, SuperTrend, VWAP, fresh 100/200 DMA crossovers, chart patterns and support/resistance to give clear Buy, Hold or Avoid signals for 1-week swing trades. Free NSE stock screener, built with Claude AI.">
+<meta name="keywords" content="NiftyScan 500, Nifty 100 screener, NSE stock screener, swing trading India, 200 DMA crossover stocks, buy signal stocks, AI stock scanner India">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://www.claudeniftyscan.in/">
-<meta property="og:title" content="claudeniftyscan — AI-Built Nifty 500 Stock Screener">
-<meta property="og:description" content="Scans 500 NSE stocks on every technical parameter and gives clear Buy / Hold / Avoid signals for 4-week holds. Free to use.">
+<link rel="canonical" href="https://niftyscan500.vercel.app/">
+<meta property="og:title" content="NiftyScan 500 — AI-Built Nifty 100 Stock Screener">
+<meta property="og:description" content="Scans Nifty 100 stocks on every technical parameter and gives clear Buy / Hold / Avoid signals for 1-week holds. Free to use.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://www.claudeniftyscan.in/">
+<meta property="og:url" content="https://niftyscan500.vercel.app/">
 <meta name="twitter:card" content="summary">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"NiftyScan 500","url":"https://www.claudeniftyscan.in/","applicationCategory":"FinanceApplication","niftystockscanner":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"description":"AI-built stock screener that scans all Nifty 500 stocks using technical indicators and gives Buy, Hold or Avoid signals for 4-week swing trades."}
+{"@context":"https://schema.org","@type":"WebApplication","name":"NiftyScan 500","url":"https://niftyscan500.vercel.app/","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"description":"AI-built stock screener that scans all Nifty 100 stocks using technical indicators and gives Buy, Hold or Avoid signals for 1-week swing trades."}
 </script>
 <meta name="theme-color" content="#060c18">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -286,7 +286,7 @@ html{-webkit-text-size-adjust:100%;}
 
 <header>
   <div class="logo">📈 NiftyScan 500 <span style="font-size:10px;color:var(--purple);font-weight:600;border:1px solid var(--border);border-radius:10px;padding:1px 7px;white-space:nowrap;">✦ Built with Claude AI</span></div>
-  <div class="header-sub">AI-built NSE Stock Screener · Technical Analysis · Buy / Avoid Signals · Nifty 500 · 4-Week Hold</div>
+  <div class="header-sub">AI-built NSE Stock Screener · Technical Analysis · Buy / Avoid Signals · Nifty 100 · 1-Week Swing</div>
   <div class="sources">
     Data: <span class="src-b src-on">Yahoo Finance v8</span>
     <span class="src-b src-on">TradingView</span>
@@ -298,7 +298,7 @@ html{-webkit-text-size-adjust:100%;}
 
 <main>
   <div class="controls">
-    <button class="btn btn-scan" id="scanBtn" onclick="startScan()">📡 Run Full Analysis (Nifty 500)</button>
+    <button class="btn btn-scan" id="scanBtn" onclick="startScan()">📡 Run Full Analysis (Nifty 100)</button>
     <button class="btn btn-sec active" data-sec="All" onclick="filterSec(this)">All</button>
     <button class="btn btn-sec" data-sec="Banking" onclick="filterSec(this)">Banking</button>
     <button class="btn btn-sec" data-sec="IT" onclick="filterSec(this)">IT</button>
@@ -319,7 +319,7 @@ html{-webkit-text-size-adjust:100%;}
 
   <div class="progress-section" id="progressSection">
     <div class="progress-top">
-      <span id="progressLabel">Scanning Nifty 500 stocks with full technical analysis...</span>
+      <span id="progressLabel">Scanning Nifty 100 stocks with full technical analysis...</span>
       <span id="progressPct">0%</span>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
@@ -376,7 +376,7 @@ html{-webkit-text-size-adjust:100%;}
   <div class="radar-section" id="radarSection">
     <div class="radar-header">
       <span style="font-size:20px">🎯</span>
-      <div class="radar-title" id="radarTitle">📈 Top Picks — Best Stocks for Next 4 Weeks</div>
+      <div class="radar-title" id="radarTitle">📈 Top Picks — Best Stocks for Next 1 Week</div>
       <div class="radar-count" id="radarCount">0</div>
     </div>
     <div class="radar-scroll" id="radarScroll"></div>
@@ -444,7 +444,7 @@ html{-webkit-text-size-adjust:100%;}
       <button class="tab-btn" data-tab="sr" onclick="switchTab('sr')">📐 Support/Resistance</button>
       <button class="tab-btn" data-tab="balance" onclick="switchTab('balance')">🏦 Financials</button>
       <button class="tab-btn" data-tab="news" onclick="switchTab('news')">📰 News & Sentiment</button>
-      <button class="tab-btn" data-tab="outlook" onclick="switchTab('outlook')">🎯 4-Week Outlook</button>
+      <button class="tab-btn" data-tab="outlook" onclick="switchTab('outlook')">🎯 1-Week Outlook</button>
     </div>
     <div class="tab-panel active" id="tab-chart"><div id="tvContainer"></div></div>
     <div class="tab-panel" id="tab-analysis"><div id="analysisContent"></div></div>
@@ -459,9 +459,9 @@ html{-webkit-text-size-adjust:100%;}
 
   <div class="empty-state" id="emptyState">
     <div class="empty-icon">📡</div>
-    <p style="font-size:16px;font-weight:600;margin-bottom:6px;">Full Technical Analysis Radar — Nifty 500</p>
-    <p style="font-size:13px;">Click <strong>"Run Full Analysis"</strong> to scan <strong>500 NSE stocks</strong> using RSI, SuperTrend, VWAP, MACD, 100/200 DMA Crossover, Support/Resistance, Trendline Breakouts, Candlestick Patterns, and more.</p>
-    <p style="font-size:11px;margin-top:8px;color:var(--muted)">Nifty 50 + Next 50 + Midcap + Smallcap — with candlestick pattern detection (Hammer, Engulfing, Morning Star, etc.) and 100/200 DMA Cross signals.</p>
+    <p style="font-size:16px;font-weight:600;margin-bottom:6px;">Full Technical Analysis Radar — Nifty 100</p>
+    <p style="font-size:13px;">Click <strong>"Run Full Analysis"</strong> to scan <strong>Nifty 100 stocks</strong> using RSI, SuperTrend, VWAP, MACD, 100/200 DMA Crossover, Support/Resistance, Trendline Breakouts, Candlestick Patterns, and more.</p>
+    <p style="font-size:11px;margin-top:8px;color:var(--muted)">Nifty 50 + Next 50 + select liquid midcaps — with candlestick pattern detection (Hammer, Engulfing, Morning Star, etc.) and 100/200 DMA Cross signals.</p>
   </div>
 
   <div class="disclaimer" id="disclaimer" style="display:none">
@@ -547,159 +547,8 @@ const UNIVERSE=[
 {s:'TATAELXSI',n:'Tata Elxsi',sec:'IT'},{s:'TATACHEM',n:'Tata Chemicals',sec:'Energy'},
 {s:'UNIONBANK',n:'Union Bank of India',sec:'Banking'},{s:'IDEA',n:'Vodafone Idea',sec:'Telecom'},
 {s:'PAYTM',n:'One97 Communications',sec:'IT'},
-// ===== NIFTY 500 EXPANSION — SMALLCAP & MIDCAP =====
-{s:'AARTIIND',n:'Aarti Industries',sec:'Pharma'},{s:'ABCAPITAL',n:'Aditya Birla Capital',sec:'Finance'},
-{s:'ABFRL',n:'Aditya Birla Fashion',sec:'FMCG'},{s:'AJANTPHARM',n:'Ajanta Pharma',sec:'Pharma'},
-{s:'ALKEM',n:'Alkem Laboratories',sec:'Pharma'},{s:'APLLTD',n:'Alembic Pharma',sec:'Pharma'},
-{s:'ATUL',n:'Atul Ltd',sec:'Pharma'},{s:'ASHOKLEY',n:'Ashok Leyland',sec:'Auto'},
-{s:'APLAPOLLO',n:'APL Apollo Tubes',sec:'Metal'},{s:'AFFLE',n:'Affle India',sec:'IT'},
-{s:'ALOKINDS',n:'Alok Industries',sec:'FMCG'},{s:'AMARAJABAT',n:'Amara Raja Energy',sec:'Auto'},
-{s:'ANGELONE',n:'Angel One',sec:'Finance'},{s:'APARINDS',n:'Apar Industries',sec:'Infra'},
-{s:'APTUS',n:'Aptus Value Housing',sec:'Finance'},{s:'ARE%26M',n:'Amara Raja Energy',sec:'Auto'},
-{s:'ATUL',n:'Atul Limited',sec:'Pharma'},{s:'AVANTIFEED',n:'Avanti Feeds',sec:'FMCG'},
-{s:'BAYERCROP',n:'Bayer CropScience',sec:'Pharma'},{s:'BDL',n:'Bharat Dynamics',sec:'Infra'},
-{s:'BSOFT',n:'Birlasoft',sec:'IT'},{s:'BSE',n:'BSE Limited',sec:'Finance'},
-{s:'CANFINHOME',n:'Can Fin Homes',sec:'Finance'},{s:'CARBORUNIV',n:'Carborundum Universal',sec:'Infra'},
-{s:'CASTROLIND',n:'Castrol India',sec:'Energy'},{s:'CEATLTD',n:'CEAT',sec:'Auto'},
-{s:'CENTRALBK',n:'Central Bank of India',sec:'Banking'},{s:'CENTURYTEX',n:'Century Textiles',sec:'Cement'},
-{s:'CESC',n:'CESC',sec:'Power'},{s:'CGPOWER',n:'CG Power & Industrial',sec:'Infra'},
-{s:'CHAMBLFERT',n:'Chambal Fertilisers',sec:'Pharma'},{s:'CHENNPETRO',n:'Chennai Petroleum',sec:'Energy'},
-{s:'CLEAN',n:'Clean Science & Tech',sec:'Pharma'},{s:'COCHINSHIP',n:'Cochin Shipyard',sec:'Infra'},
-{s:'COROMANDEL',n:'Coromandel International',sec:'Pharma'},{s:'CREDITACC',n:'CreditAccess Grameen',sec:'Finance'},
-{s:'CYIENT',n:'Cyient',sec:'IT'},{s:'DCMSHRIRAM',n:'DCM Shriram',sec:'Pharma'},
-{s:'DEEPAKNTR',n:'Deepak Nitrite',sec:'Pharma'},{s:'DELTACORP',n:'Delta Corp',sec:'FMCG'},
-{s:'DEVYANI',n:'Devyani International',sec:'FMCG'},{s:'DHANUKA',n:'Dhanuka Agritech',sec:'Pharma'},
-{s:'DISHTV',n:'Dish TV India',sec:'Telecom'},{s:'DIXON',n:'Dixon Technologies',sec:'IT'},
-{s:'ECLERX',n:'eClerx Services',sec:'IT'},{s:'EIDPARRY',n:'EID Parry India',sec:'FMCG'},
-{s:'ELGIEQUIP',n:'Elgi Equipments',sec:'Infra'},{s:'EMAMILTD',n:'Emami',sec:'FMCG'},
-{s:'ENDURANCE',n:'Endurance Technologies',sec:'Auto'},{s:'ENGINERSIN',n:'Engineers India',sec:'Infra'},
-{s:'EQUITASBNK',n:'Equitas Small Finance',sec:'Banking'},{s:'EXIDEIND',n:'Exide Industries',sec:'Auto'},
-{s:'FDC',n:'FDC Limited',sec:'Pharma'},{s:'FINEORG',n:'Fine Organic Industries',sec:'Pharma'},
-{s:'FLUOROCHEM',n:'Gujarat Fluorochemicals',sec:'Pharma'},{s:'GICRE',n:'General Insurance Corp',sec:'Finance'},
-{s:'GLAXO',n:'GSK Pharma',sec:'Pharma'},{s:'GLENMARK',n:'Glenmark Pharma',sec:'Pharma'},
-{s:'GMRINFRA',n:'GMR Airports Infra',sec:'Infra'},{s:'GNFC',n:'Gujarat Narmada Valley',sec:'Pharma'},
-{s:'GPPL',n:'Gujarat Pipavav Port',sec:'Infra'},{s:'GRANULES',n:'Granules India',sec:'Pharma'},
-{s:'GRAPHITE',n:'Graphite India',sec:'Metal'},{s:'GSFC',n:'Gujarat State Fertilizers',sec:'Pharma'},
-{s:'GSPL',n:'Gujarat State Petronet',sec:'Energy'},{s:'GUJGASLTD',n:'Gujarat Gas',sec:'Energy'},
-{s:'HAPPSTMNDS',n:'Happiest Minds',sec:'IT'},{s:'HATSUN',n:'Hatsun Agro Products',sec:'FMCG'},
-{s:'HFCL',n:'HFCL',sec:'Telecom'},{s:'HONAUT',n:'Honeywell Automation',sec:'Infra'},
-{s:'HUDCO',n:'HUDCO',sec:'Finance'},{s:'IBREALEST',n:'Indiabulls Real Estate',sec:'Realty'},
-{s:'ICICIBANK',n:'ICICI Bank',sec:'Banking'},{s:'ICICIGI',n:'ICICI Lombard',sec:'Finance'},
-{s:'IDBI',n:'IDBI Bank',sec:'Banking'},{s:'IEX',n:'Indian Energy Exchange',sec:'Power'},
-{s:'IIFL',n:'IIFL Finance',sec:'Finance'},{s:'INDIACEM',n:'India Cements',sec:'Cement'},
-{s:'INDIAMART',n:'IndiaMART InterMESH',sec:'IT'},{s:'INDIGOPNTS',n:'Indigo Paints',sec:'FMCG'},
-{s:'INTELLECT',n:'Intellect Design Arena',sec:'IT'},{s:'IRB',n:'IRB Infra Developers',sec:'Infra'},
-{s:'ISEC',n:'ICICI Securities',sec:'Finance'},{s:'ITI',n:'ITI Limited',sec:'Telecom'},
-{s:'JBCHEPHARM',n:'JB Chemicals',sec:'Pharma'},{s:'JKCEMENT',n:'JK Cement',sec:'Cement'},
-{s:'JKLAKSHMI',n:'JK Lakshmi Cement',sec:'Cement'},{s:'JKPAPER',n:'JK Paper',sec:'FMCG'},
-{s:'JMFINANCIL',n:'JM Financial',sec:'Finance'},{s:'JSL',n:'Jindal Stainless',sec:'Metal'},
-{s:'JSWINFRA',n:'JSW Infrastructure',sec:'Infra'},{s:'JTEKTINDIA',n:'JTEKT India',sec:'Auto'},
-{s:'KAJARIACER',n:'Kajaria Ceramics',sec:'Infra'},{s:'KANSAINER',n:'Kansai Nerolac',sec:'FMCG'},
-{s:'KEC',n:'KEC International',sec:'Infra'},{s:'KEI',n:'KEI Industries',sec:'Infra'},
-{s:'KALYANKJIL',n:'Kalyan Jewellers',sec:'FMCG'},{s:'KRBL',n:'KRBL',sec:'FMCG'},
-{s:'LALPATHLAB',n:'Dr Lal PathLabs',sec:'Pharma'},{s:'LATENTVIEW',n:'Latent View Analytics',sec:'IT'},
-{s:'LAURUSLABS',n:'Laurus Labs',sec:'Pharma'},{s:'LICI',n:'Life Insurance Corp',sec:'Finance'},
-{s:'LLOYDSME',n:'Lloyds Metals & Energy',sec:'Metal'},{s:'LTF',n:'L&T Finance',sec:'Finance'},
-{s:'LTFOODS',n:'LT Foods',sec:'FMCG'},{s:'LUXIND',n:'Lux Industries',sec:'FMCG'},
-{s:'MFSL',n:'Max Financial Services',sec:'Finance'},{s:'MAHLIFE',n:'Mahindra Lifespace',sec:'Realty'},
-{s:'MAHSEAMLES',n:'Maharashtra Seamless',sec:'Metal'},{s:'MANKIND',n:'Mankind Pharma',sec:'Pharma'},
-{s:'MAXHEALTH',n:'Max Healthcare',sec:'Pharma'},{s:'MAZDOCK',n:'Mazagon Dock',sec:'Infra'},
-{s:'MCX',n:'Multi Commodity Exchange',sec:'Finance'},{s:'MEDANTA',n:'Medanta (GCPL)',sec:'Pharma'},
-{s:'METROPOLIS',n:'Metropolis Healthcare',sec:'Pharma'},{s:'MINDACORP',n:'Minda Corporation',sec:'Auto'},
-{s:'MMTC',n:'MMTC',sec:'Metal'},{s:'MOIL',n:'MOIL',sec:'Metal'},
-{s:'MRPL',n:'MRPL',sec:'Energy'},{s:'MRF',n:'MRF',sec:'Auto'},
-{s:'MSTCLTD',n:'MSTC',sec:'Infra'},{s:'NAM-INDIA',n:'Nippon Life AMC',sec:'Finance'},
-{s:'NATIONALUM',n:'National Aluminium',sec:'Metal'},{s:'NAUKRI',n:'Info Edge',sec:'IT'},
-{s:'NAVINFLUOR',n:'Navin Fluorine',sec:'Pharma'},{s:'NCC',n:'NCC Limited',sec:'Infra'},
-{s:'NELCO',n:'Nelco',sec:'Telecom'},{s:'NETWORK18',n:'Network18 Media',sec:'FMCG'},
-{s:'NMDC',n:'NMDC',sec:'Metal'},{s:'NOCIL',n:'NOCIL',sec:'Pharma'},
-{s:'NSLNISP',n:'NLCIL',sec:'Power'},{s:'OFSS',n:'Oracle Financial Services',sec:'IT'},
-{s:'OIL',n:'Oil India',sec:'Energy'},{s:'OLECTRA',n:'Olectra Greentech',sec:'Auto'},
-{s:'ORIENTELEC',n:'Orient Electric',sec:'FMCG'},{s:'PGHH',n:'Procter & Gamble Hygiene',sec:'FMCG'},
-{s:'PHOENIXLTD',n:'Phoenix Mills',sec:'Realty'},{s:'PNBHOUSING',n:'PNB Housing Finance',sec:'Finance'},
-{s:'POLYMED',n:'Poly Medicure',sec:'Pharma'},{s:'POONAWALLA',n:'Poonawalla Fincorp',sec:'Finance'},
-{s:'PRINCEPIPE',n:'Prince Pipes',sec:'Infra'},{s:'PVRINOX',n:'PVR INOX',sec:'FMCG'},
-{s:'RADICO',n:'Radico Khaitan',sec:'FMCG'},{s:'RAIN',n:'Rain Industries',sec:'Metal'},
-{s:'RAJESHEXPO',n:'Rajesh Exports',sec:'FMCG'},{s:'RALLIS',n:'Rallis India',sec:'Pharma'},
-{s:'RAMCOCEM',n:'Ramco Cements',sec:'Cement'},{s:'RBLBANK',n:'RBL Bank',sec:'Banking'},
-{s:'REDINGTON',n:'Redington India',sec:'IT'},{s:'RELAXO',n:'Relaxo Footwears',sec:'FMCG'},
-{s:'RITES',n:'RITES',sec:'Infra'},{s:'ROUTE',n:'Route Mobile',sec:'IT'},
-{s:'SANOFI',n:'Sanofi India',sec:'Pharma'},{s:'SAPPHIRE',n:'Sapphire Foods',sec:'FMCG'},
-{s:'SCHAEFFLER',n:'Schaeffler India',sec:'Auto'},{s:'SHILPAMED',n:'Shilpa Medicare',sec:'Pharma'},
-{s:'SJVN',n:'SJVN',sec:'Power'},{s:'SOBHA',n:'Sobha',sec:'Realty'},
-{s:'SOLARINDS',n:'Solar Industries',sec:'Infra'},{s:'SONACOMS',n:'Sona BLW Precision',sec:'Auto'},
-{s:'SONATSOFTW',n:'Sonata Software',sec:'IT'},{s:'STARHEALTH',n:'Star Health Insurance',sec:'Finance'},
-{s:'SUMICHEM',n:'Sumitomo Chemical',sec:'Pharma'},{s:'SUNCLAYLTD',n:'Sundaram Clayton',sec:'Auto'},
-{s:'SUNDARMFIN',n:'Sundaram Finance',sec:'Finance'},{s:'SUNDRMFAST',n:'Sundram Fasteners',sec:'Auto'},
-{s:'SUNTV',n:'Sun TV Network',sec:'FMCG'},{s:'SUPREMEIND',n:'Supreme Industries',sec:'Infra'},
-{s:'SUVENPHAR',n:'Suven Pharmaceuticals',sec:'Pharma'},{s:'SWANENERGY',n:'Swan Energy',sec:'Energy'},
-{s:'SWSOLAR',n:'Sterling & Wilson Solar',sec:'Power'},{s:'SYNGENE',n:'Syngene International',sec:'Pharma'},
-{s:'TATACOMM',n:'Tata Communications',sec:'Telecom'},{s:'TATAINVEST',n:'Tata Investment Corp',sec:'Finance'},
-{s:'THERMAX',n:'Thermax',sec:'Infra'},{s:'THYROCARE',n:'Thyrocare Technologies',sec:'Pharma'},
-{s:'TIINDIA',n:'Tube Investments',sec:'Auto'},{s:'TIMKEN',n:'Timken India',sec:'Auto'},
-{s:'TORNTPOWER',n:'Torrent Power',sec:'Power'},{s:'TRIDENT',n:'Trident',sec:'FMCG'},
-{s:'TTML',n:'Tata Teleservices',sec:'Telecom'},{s:'TV18BRDCST',n:'TV18 Broadcast',sec:'FMCG'},
-{s:'UBL',n:'United Breweries',sec:'FMCG'},{s:'UCOBANK',n:'UCO Bank',sec:'Banking'},
-{s:'UJJIVANSFB',n:'Ujjivan SFB',sec:'Banking'},{s:'UPL',n:'UPL',sec:'Pharma'},
-{s:'VAIBHAVGBL',n:'Vaibhav Global',sec:'FMCG'},{s:'VGUARD',n:'V-Guard Industries',sec:'FMCG'},
-{s:'VEDL',n:'Vedanta',sec:'Metal'},{s:'VIJAYA',n:'Vijaya Diagnostic',sec:'Pharma'},
-{s:'VTL',n:'Vardhman Textiles',sec:'FMCG'},{s:'WELCORP',n:'Welspun Corp',sec:'Metal'},
-{s:'WELSPUNLIV',n:'Welspun Living',sec:'FMCG'},{s:'WHIRLPOOL',n:'Whirlpool India',sec:'FMCG'},
-{s:'WIPRO',n:'Wipro',sec:'IT'},{s:'YESBANK',n:'Yes Bank',sec:'Banking'},
-{s:'ZEEL',n:'Zee Entertainment',sec:'FMCG'},{s:'ZENSARTECH',n:'Zensar Technologies',sec:'IT'},
-{s:'ZFCVINDIA',n:'ZF Commercial Vehicle',sec:'Auto'},{s:'ZYDUSLIFE',n:'Zydus Lifesciences',sec:'Pharma'},
-// ===== MORE NIFTY 500 — SMALLCAP =====
-{s:'AAVAS',n:'Aavas Financiers',sec:'Finance'},{s:'AIAENG',n:'AIA Engineering',sec:'Infra'},
-{s:'ALKYLAMINE',n:'Alkyl Amines',sec:'Pharma'},{s:'ANURAS',n:'Anupam Rasayan',sec:'Pharma'},
-{s:'ASTER',n:'Aster DM Healthcare',sec:'Pharma'},{s:'BASF',n:'BASF India',sec:'Pharma'},
-{s:'BEML',n:'BEML',sec:'Infra'},{s:'BIRLACORPN',n:'Birla Corporation',sec:'Cement'},
-{s:'BLUESTARCO',n:'Blue Star',sec:'FMCG'},{s:'CAMPUS',n:'Campus Activewear',sec:'FMCG'},
-{s:'CDSL',n:'Central Depository Services',sec:'Finance'},{s:'CENTURYPLY',n:'Century Plyboards',sec:'Infra'},
-{s:'CHALET',n:'Chalet Hotels',sec:'Realty'},{s:'CUB',n:'City Union Bank',sec:'Banking'},
-{s:'DATAPATTNS',n:'Data Patterns',sec:'Infra'},{s:'DBREALTY',n:'DB Realty',sec:'Realty'},
-{s:'DEEPAKFERT',n:'Deepak Fertilisers',sec:'Pharma'},{s:'ELECON',n:'Elecon Engineering',sec:'Infra'},
-{s:'EMAMIREAL',n:'Emami Realty',sec:'Realty'},{s:'EPIGRAL',n:'Epigral (Meghmani)',sec:'Pharma'},
-{s:'ERIS',n:'Eris Lifesciences',sec:'Pharma'},{s:'FINCABLES',n:'Finolex Cables',sec:'Infra'},
-{s:'FINPIPE',n:'Finolex Industries',sec:'Infra'},{s:'FIRSTSOUR',n:'Firstsource Solutions',sec:'IT'},
-{s:'GESHIP',n:'Great Eastern Shipping',sec:'Infra'},{s:'GLAND',n:'Gland Pharma',sec:'Pharma'},
-{s:'GODFRYPHLP',n:'Godfrey Phillips',sec:'FMCG'},{s:'GODREJIND',n:'Godrej Industries',sec:'FMCG'},
-{s:'GRINDWELL',n:'Grindwell Norton',sec:'Infra'},{s:'GRSE',n:'Garden Reach Shipbuilders',sec:'Infra'},
-{s:'GUJALKALI',n:'Gujarat Alkalies',sec:'Pharma'},{s:'HEG',n:'HEG',sec:'Metal'},
-{s:'HEMIPROP',n:'Hemisphere Properties',sec:'Realty'},{s:'HINDZINC',n:'Hindustan Zinc',sec:'Metal'},
-{s:'HOMEFIRST',n:'Home First Finance',sec:'Finance'},{s:'IBULHSGFIN',n:'Indiabulls Housing',sec:'Finance'},
-{s:'IDFC',n:'IDFC',sec:'Finance'},{s:'IIFLWAM',n:'IIFL Wealth Management',sec:'Finance'},
-{s:'INDIGRID',n:'IndiGrid InvIT',sec:'Power'},{s:'JAMNAAUTO',n:'Jamna Auto Industries',sec:'Auto'},
-{s:'JAYNECOIND',n:'Jayaswal Neco Industries',sec:'Metal'},{s:'JBMA',n:'JBM Auto',sec:'Auto'},
-{s:'JKTYRE',n:'JK Tyre & Industries',sec:'Auto'},{s:'JMFINANCIL',n:'JM Financial',sec:'Finance'},
-{s:'JPPOWER',n:'Jaiprakash Power',sec:'Power'},{s:'JUSTDIAL',n:'Just Dial',sec:'IT'},
-{s:'KALPATPOWR',n:'Kalpataru Projects',sec:'Infra'},{s:'KIMS',n:'Krishna Institute Medical',sec:'Pharma'},
-{s:'KNRCON',n:'KNR Constructions',sec:'Infra'},{s:'KOLTEPATIL',n:'Kolte-Patil Developers',sec:'Realty'},
-{s:'KPRMILL',n:'KPR Mill',sec:'FMCG'},{s:'LAOPALA',n:'La Opala RG',sec:'FMCG'},
-{s:'LEMONTREE',n:'Lemon Tree Hotels',sec:'Realty'},{s:'LINDEINDIA',n:'Linde India',sec:'Pharma'},
-{s:'MAHLOG',n:'Mahindra Logistics',sec:'Infra'},{s:'MAPMYINDIA',n:'CE Info Systems',sec:'IT'},
-{s:'MASTEK',n:'Mastek',sec:'IT'},{s:'MEDPLUS',n:'MedPlus Health',sec:'Pharma'},
-{s:'MOTILALOFS',n:'Motilal Oswal',sec:'Finance'},{s:'MPHASIS',n:'Mphasis',sec:'IT'},
-{s:'NATCOPHARM',n:'Natco Pharma',sec:'Pharma'},{s:'NIACL',n:'New India Assurance',sec:'Finance'},
-{s:'NUCLEUS',n:'Nucleus Software',sec:'IT'},{s:'OLECTRA',n:'Olectra Greentech',sec:'Auto'},
-{s:'PNCINFRA',n:'PNC Infratech',sec:'Infra'},{s:'POWERMECH',n:'Power Mech Projects',sec:'Infra'},
-{s:'PRSMJOHNSN',n:'Prism Johnson',sec:'Cement'},{s:'RAILTEL',n:'RailTel Corporation',sec:'IT'},
-{s:'RATNAMANI',n:'Ratnamani Metals',sec:'Metal'},{s:'RAYMOND',n:'Raymond',sec:'FMCG'},
-{s:'RCF',n:'Rashtriya Chemicals',sec:'Pharma'},{s:'RHIM',n:'RHI Magnesita India',sec:'Metal'},
-{s:'RITES',n:'RITES',sec:'Infra'},{s:'RVNL',n:'Rail Vikas Nigam',sec:'Infra'},
-{s:'SANOFI',n:'Sanofi India',sec:'Pharma'},{s:'SAPPHIRE',n:'Sapphire Foods',sec:'FMCG'},
-{s:'SAREGAMA',n:'Saregama India',sec:'FMCG'},{s:'SHYAMMETL',n:'Shyam Metalics',sec:'Metal'},
-{s:'SKFINDIA',n:'SKF India',sec:'Auto'},{s:'SOLARINDS',n:'Solar Industries',sec:'Infra'},
-{s:'SPARC',n:'Sun Pharma Advanced',sec:'Pharma'},{s:'STARCEMENT',n:'Star Cement',sec:'Cement'},
-{s:'SUNTECK',n:'Sunteck Realty',sec:'Realty'},{s:'TANLA',n:'Tanla Platforms',sec:'IT'},
-{s:'TATACOMM',n:'Tata Communications',sec:'Telecom'},{s:'TCIEXP',n:'TCI Express',sec:'Infra'},
-{s:'TEAMLEASE',n:'TeamLease Services',sec:'IT'},{s:'TITAGARH',n:'Titagarh Rail Systems',sec:'Infra'},
-{s:'TMB',n:'Tamilnad Mercantile Bank',sec:'Banking'},{s:'TRIVENI',n:'Triveni Engineering',sec:'FMCG'},
-{s:'UCOBANK',n:'UCO Bank',sec:'Banking'},{s:'UTIAMC',n:'UTI AMC',sec:'Finance'},
-{s:'VARROC',n:'Varroc Engineering',sec:'Auto'},{s:'VRLLOG',n:'VRL Logistics',sec:'Infra'},
-{s:'VSTIND',n:'VST Industries',sec:'FMCG'},{s:'WABAG',n:'VA Tech Wabag',sec:'Infra'},
-{s:'WELSPUNLIV',n:'Welspun Living',sec:'FMCG'},{s:'WESTLIFE',n:'Westlife Foodworld',sec:'FMCG'},
-{s:'ZENSARTECH',n:'Zensar Technologies',sec:'IT'},{s:'ZFCVINDIA',n:'ZF Commercial Vehicle',sec:'Auto'},
 ];
+const UNI_SET=new Set(UNIVERSE.flatMap(u=>[u.s,u.s.replace('%26','&')]));
 
 // ================================================================
 // STATE
@@ -1108,7 +957,7 @@ function scoreStock(data){
   // === STEP 1: RSI Analysis ===
   let rsiVerdict='neutral',rsiReason='';
   if(lr<25){techScore+=22;rsiVerdict='bullish';rsiReason=`RSI at ${fmt(lr,1)} is deeply oversold (<25). This extreme oversold condition historically leads to a bounce within 1-3 weeks. Strong buy signal from RSI.`;}
-  else if(lr<35){techScore+=14;rsiVerdict='bullish';rsiReason=`RSI at ${fmt(lr,1)} is in the oversold zone (<35). Selling pressure is exhausted, indicating a potential reversal upward. Bullish for a 4-week hold.`;}
+  else if(lr<35){techScore+=14;rsiVerdict='bullish';rsiReason=`RSI at ${fmt(lr,1)} is in the oversold zone (<35). Selling pressure is exhausted, indicating a potential reversal upward. Bullish for a 1-week swing hold.`;}
   else if(lr<45){techScore+=6;rsiVerdict='neutral';rsiReason=`RSI at ${fmt(lr,1)} is approaching oversold territory. Not yet a strong buy signal but showing that sellers are losing momentum.`;}
   else if(lr>=45&&lr<=55){rsiVerdict='neutral';rsiReason=`RSI at ${fmt(lr,1)} is in the neutral zone (45-55). No clear directional bias from RSI. Other indicators needed for confirmation.`;}
   else if(lr>55&&lr<65){techScore+=3;rsiVerdict='bullish';rsiReason=`RSI at ${fmt(lr,1)} shows healthy bullish momentum without being overbought. Good position for continued upward movement.`;}
@@ -1226,7 +1075,7 @@ function scoreStock(data){
   else if(brokeBelow100){crossNote=` <strong>⚠️ BROKE BELOW 100-DMA!</strong> Price just fell below the 100-day moving average. Medium-term trend weakening.`;}
   else if(above100||above200){const ext=Math.max(barsAbove100,barsAbove200);crossNote=` <strong>⏳ NOT A FRESH ENTRY:</strong> Price has already been above the ${above200?'200':'100'}-DMA for ${ext} candle${ext>1?'s':''}. The crossover happened earlier — entry is late. Only minimal points given; waiting for fresher setups.`;}
 
-  if(maBullCount===2){maVerdict=(crossed100||crossed200)?'bullish':'neutral';maReason=`Price is <strong>above BOTH 100-DMA</strong> (₹${fmt(l100)}) <strong>and 200-DMA</strong> (₹${fmt(l200)}).${(crossed100||crossed200)?' Stock has JUST crossed above — confirmed fresh uptrend. Ideal for 4-week hold.':' Uptrend intact, but the cross happened earlier — this is not an early entry anymore.'}${crossNote}`;}
+  if(maBullCount===2){maVerdict=(crossed100||crossed200)?'bullish':'neutral';maReason=`Price is <strong>above BOTH 100-DMA</strong> (₹${fmt(l100)}) <strong>and 200-DMA</strong> (₹${fmt(l200)}).${(crossed100||crossed200)?' Stock has JUST crossed above — confirmed fresh uptrend. Ideal for 1-week swing hold.':' Uptrend intact, but the cross happened earlier — this is not an early entry anymore.'}${crossNote}`;}
   else if(maBullCount===1){maVerdict='neutral';maReason=`Price is above ${above200?'200-DMA (₹'+fmt(l200)+') but below 100-DMA (₹'+fmt(l100)+')':'100-DMA (₹'+fmt(l100)+') but below 200-DMA (₹'+fmt(l200)+')'}. Only partially crossed — ${above200?'long-term trend supports but medium-term resistance remains.':'medium-term recovery started but long-term trend not confirmed.'}${crossNote}`;}
   else{maVerdict='bearish';maReason=`Price is <strong>below BOTH 100-DMA</strong> (₹${fmt(l100)}) <strong>and 200-DMA</strong> (₹${fmt(l200)}). Stock has NOT crossed either key moving average. In confirmed downtrend — avoid buying until price crosses above at least the 100-DMA.${crossNote}`;}
   steps.push({num:5,title:'Price Cross 100/200 DMA',verdict:maVerdict,value:crossed100||crossed200?'🔥 FRESH CROSS':(maBullCount>0?`⏳ Extended (${Math.max(barsAbove100,barsAbove200)}d above)`:`${maBullCount}/2 Above`),reason:maReason});
@@ -1249,7 +1098,7 @@ function scoreStock(data){
 
   // === STEP 7: Trendline Breakout ===
   let tbVerdict='neutral',tbReason='';
-  if(trendBreak.breakout==='bullish'){techScore+=14;tbVerdict='bullish';tbReason=`<strong>BULLISH BREAKOUT!</strong> ${trendBreak.desc}. Trendline breakouts with volume confirm a change in trend. This is a high-conviction buy signal for 4-week hold.`;}
+  if(trendBreak.breakout==='bullish'){techScore+=14;tbVerdict='bullish';tbReason=`<strong>BULLISH BREAKOUT!</strong> ${trendBreak.desc}. Trendline breakouts with volume confirm a change in trend. This is a high-conviction buy signal for 1-week swing hold.`;}
   else if(trendBreak.breakout==='bearish'){techScore-=12;tbVerdict='bearish';tbReason=`<strong>BEARISH BREAKDOWN!</strong> ${trendBreak.desc}. Support trendline violation indicates selling pressure. Avoid until price recovers.`;}
   else if(trendBreak.breakout==='testing-resist'){techScore+=4;tbVerdict='neutral';tbReason=`${trendBreak.desc} — watch closely! A breakout above this level could trigger a strong rally. Consider buying on confirmed breakout with volume.`;}
   else if(trendBreak.breakout==='testing-support'){techScore-=3;tbVerdict='neutral';tbReason=`${trendBreak.desc} — critical level! A breakdown could accelerate selling. Place stop-loss just below this support.`;}
@@ -1271,15 +1120,21 @@ function scoreStock(data){
 
   // === MOMENTUM SCORE ===
   let momReason='';
-  if(n>=5){const r1w=(closes[n-1]-closes[n-5])/closes[n-5]*100;
-    if(r1w>5){momScore+=14;momReason+=`Strong 1-week return of +${fmt(r1w,1)}%. `;}
-    else if(r1w>2){momScore+=7;momReason+=`Positive 1-week return +${fmt(r1w,1)}%. `;}
-    else if(r1w<-5){momScore-=12;momReason+=`Weak 1-week return ${fmt(r1w,1)}%. `;}
-    else if(r1w<-2){momScore-=5;momReason+=`Negative 1-week return ${fmt(r1w,1)}%. `;}
-    else{momReason+=`Flat 1-week return ${fmt(r1w,1)}%. `;}}
+  // === ANTI-SPIKE GUARD (1-week swing focus): reward EARLY entries, penalize chasing stocks that already ran ===
+  let runup5d=0,spikeLevel=0;
+  const chgNow=n>=2?((closes[n-1]-closes[n-2])/closes[n-2]*100):0;
+  if(n>=5){runup5d=(closes[n-1]-closes[n-5])/closes[n-5]*100;
+    if(runup5d>8){momScore-=18;momReason+=`⚠️ Already ran +${fmt(runup5d,1)}% in 1 week — spike-chase risk, entry is late. `;}
+    else if(runup5d>4){momScore-=10;momReason+=`⚠️ Extended +${fmt(runup5d,1)}% in 1 week — most of the move may already be done. `;}
+    else if(runup5d>1){momScore+=8;momReason+=`✅ Early momentum +${fmt(runup5d,1)}% — move just starting, ideal early-entry zone. `;}
+    else if(runup5d<-5){momScore-=12;momReason+=`Weak 1-week return ${fmt(runup5d,1)}%. `;}
+    else if(runup5d<-2){momScore-=5;momReason+=`Negative 1-week return ${fmt(runup5d,1)}%. `;}
+    else{momScore+=3;momReason+=`Flat 1-week (${fmt(runup5d,1)}%) — coiled, no spike yet. `;}}
+  if(chgNow>4){momScore-=8;momReason+=`⚠️ Today already +${fmt(chgNow,1)}% — avoid chasing today's spike. `;}
+  spikeLevel=(runup5d>8||chgNow>5)?2:(runup5d>4||chgNow>3.5)?1:0;
   if(n>=21){const r1m=(closes[n-1]-closes[n-21])/closes[n-21]*100;
-    if(r1m>10){momScore+=12;momReason+=`Strong 1-month rally +${fmt(r1m,1)}%. `;}
-    else if(r1m>4){momScore+=6;momReason+=`Positive 1-month +${fmt(r1m,1)}%. `;}
+    if(r1m>10){momScore+=4;momReason+=`Strong 1-month rally +${fmt(r1m,1)}%. `;}
+    else if(r1m>4){momScore+=2;momReason+=`Positive 1-month +${fmt(r1m,1)}%. `;}
     else if(r1m<-10){momScore-=12;momReason+=`Sharp 1-month decline ${fmt(r1m,1)}%. `;}
     else if(r1m<-4){momScore-=5;momReason+=`Negative 1-month ${fmt(r1m,1)}%. `;}}
   // Volume
@@ -1356,17 +1211,21 @@ function scoreStock(data){
     beta:betaData.beta,correlation:betaData.correlation,atr14,
     trailingStop,trailingStopPct,
     relativeStrength,stock30dReturn,nifty30dReturn,
+    runup5d,spikeLevel,
     resilienceScore
   };
 }
 
-function getSignal(s,beta,regime){
+function getSignal(s,beta,regime,spikeLevel){
   let base;
   // Pure v3/v4 score-based signals
   if(s>=75)base={label:'Strong Buy',cls:'signal-strong-buy',key:'strong-buy',emoji:'🚀'};
   else if(s>=63)base={label:'Buy',cls:'signal-buy',key:'buy',emoji:'✅'};
   else if(s>=50)base={label:'Hold',cls:'signal-hold',key:'hold',emoji:'⏳'};
   else base={label:'Avoid',cls:'signal-avoid',key:'avoid',emoji:'🚫'};
+  // Anti-spike cap: no Strong Buy after the move already happened
+  if(spikeLevel>=2&&(base.key==='strong-buy'||base.key==='buy'))base={label:'Hold',cls:'signal-hold',key:'hold',emoji:'⏳',downgraded:true,spiked:true};
+  else if(spikeLevel===1&&base.key==='strong-buy')base={label:'Buy',cls:'signal-buy',key:'buy',emoji:'✅',downgraded:true,spiked:true};
   if(!regime)return base;
   if(regime==='CAUTION'){
     if(base.key==='strong-buy'&&beta>1.0)return{label:'Buy',cls:'signal-buy',key:'buy',emoji:'✅',downgraded:true};
@@ -1399,7 +1258,7 @@ async function startScan(){
   // Show indeterminate progress
   document.getElementById('progressFill').style.width='30%';
   document.getElementById('progressPct').textContent='...';
-  apiEl.textContent='Server is scanning Nifty 500 stocks — this may take 2-3 minutes...';
+  apiEl.textContent='Server is scanning Nifty 100 stocks — this may take 2-3 minutes...';
 
   try{
     // First try backend bulk scan for what it knows
@@ -1439,8 +1298,13 @@ async function startScan(){
     const scannedSymbols=new Set();
     for(const r of backendResults){
       const sym=r.symbol.replace('%26','&');
+      if(!UNI_SET.has(sym)&&!UNI_SET.has(r.symbol))continue; // Nifty 100 only
       scannedSymbols.add(r.symbol);scannedSymbols.add(sym);
-      const sig=signalMap[r.signalKey]||signalMap['hold'];
+      let sig=signalMap[r.signalKey]||signalMap['hold'];
+      // Anti-spike safety: no Strong Buy on stocks that already ran
+      const ru5=(r.runup5d!=null)?r.runup5d:0;
+      if((ru5>8||r.change>5)&&(sig.key==='strong-buy'||sig.key==='buy'))sig=signalMap['hold'];
+      else if((ru5>4||r.change>3.5)&&sig.key==='strong-buy')sig=signalMap['buy'];
       if(sig.key==='strong-buy')counts.sb++;else if(sig.key==='buy')counts.b++;else if(sig.key==='hold'||sig.key==='cautious-buy')counts.h++;else counts.a++;
       const scored={
         price:r.price,change:r.change,totalScore:r.totalScore,techScore:r.techScore,momScore:r.momScore,
@@ -1487,7 +1351,7 @@ async function startScan(){
         const meta={fiftyTwoWeekHigh:d.fiftyTwoWeekHigh||Math.max(...highs),fiftyTwoWeekLow:d.fiftyTwoWeekLow||Math.min(...lows)};
         // Run scoring engine
         const scored=scoreStock({meta,closes,highs,lows,volumes,opens,sector:stock.sec});
-        const sig=getSignal(scored.totalScore,scored.beta,marketRegime);
+        const sig=getSignal(scored.totalScore,scored.beta,marketRegime,scored.spikeLevel);
         return{stock,scored,sig,meta};
       }));
 
@@ -1542,14 +1406,14 @@ async function startScan(){
     document.getElementById('statB').textContent=counts.b;
     document.getElementById('statH').textContent=counts.h;
     document.getElementById('statA').textContent=counts.a;
-    apiEl.textContent=totalOk===0?'❌ Could not reach the data server. Check your internet connection and open this file in Chrome or Safari directly (not inside the WhatsApp/Telegram preview), then tap Rescan.':`✅ Full Nifty 500 scan complete — ${totalOk} stocks analyzed.${clientFail>0?' ('+clientFail+' failed)':''}`;
+    apiEl.textContent=totalOk===0?'❌ Could not reach the data server. Check your internet connection and open this file in Chrome or Safari directly (not inside the WhatsApp/Telegram preview), then tap Rescan.':`✅ Full Nifty 100 scan complete — ${totalOk} stocks analyzed.${clientFail>0?' ('+clientFail+' failed)':''}`;
   }catch(err){
     apiEl.textContent='❌ Scan failed: '+err.message+'. Please try again.';
     document.getElementById('progressFill').style.width='0%';
   }
 
   document.getElementById('progressLabel').textContent='✅ Full analysis complete!';
-  btn.disabled=false;btn.textContent='🔄 Rescan Nifty 500 ('+UNIVERSE.length+' Stocks)';
+  btn.disabled=false;btn.textContent='🔄 Rescan Nifty 100 ('+UNIVERSE.length+' Stocks)';
   scanning=false;
   allResults.sort((a,b)=>b.score-a.score);
   renderTable();renderRadar();updateMarketBadge();
@@ -2341,7 +2205,7 @@ function renderOutlook(dd,res){
   let tgtUp=0.04;if(enhanced>=72)tgtUp=0.10;else if(enhanced>=62)tgtUp=0.07;else if(enhanced>=52)tgtUp=0.04;else if(enhanced>=42)tgtUp=0.01;else tgtUp=-0.04;
   const target=p*(1+tgtUp),sl=p*0.94,rr=tgtUp>0?(tgtUp/0.06).toFixed(1):'—';
 
-  let h=`<div class="outlook-box"><div class="outlook-title">🎯 4-Week Hold Assessment <span class="signal-pill ${eSig.cls}" style="font-size:13px">${eSig.emoji} ${eSig.label}</span> <span class="score-badge ${scCls(enhanced)}" style="margin-left:6px">${enhanced}</span></div>`;
+  let h=`<div class="outlook-box"><div class="outlook-title">🎯 1-Week Swing Assessment <span class="signal-pill ${eSig.cls}" style="font-size:13px">${eSig.emoji} ${eSig.label}</span> <span class="score-badge ${scCls(enhanced)}" style="margin-left:6px">${enhanced}</span></div>`;
   h+=`<div class="target-row">
     <div class="target-item"><div class="t-label">Current</div><div class="t-val">₹${fmt(p)}</div></div>
     <div class="target-item"><div class="t-label">4W Target</div><div class="t-val pos">₹${fmt(target)}</div><div class="t-sub">${fmt(tgtUp*100,1)}% upside</div></div>
