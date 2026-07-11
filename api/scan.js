@@ -64,7 +64,7 @@ module.exports = async function handler(req, res) {
 
             data.sector = stock.sec;
             const scored = scoreStock(data, nifty60dHistory);
-            const signal = getSignal(scored.totalScore, scored.beta, regime);
+            const signal = getSignal(scored.totalScore, scored.beta, regime, scored.spikeLevel);
             const resilience = getResilienceLabel(scored.resilienceScore);
 
             // Compute defensive score: 50% original + 50% resilience
@@ -76,6 +76,7 @@ module.exports = async function handler(req, res) {
               sector: stock.sec,
               price: scored.price,
               change: parseFloat(scored.change.toFixed(2)),
+              runup5d: scored.runup5d != null ? parseFloat(scored.runup5d.toFixed(2)) : 0,
               totalScore: scored.totalScore,
               techScore: scored.techScore,
               momScore: scored.momScore,
