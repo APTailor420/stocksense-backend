@@ -77,6 +77,8 @@ module.exports = async function handler(req, res) {
               price: scored.price,
               change: parseFloat(scored.change.toFixed(2)),
               runup5d: scored.runup5d != null ? parseFloat(scored.runup5d.toFixed(2)) : 0,
+              crossed100: !!scored.crossed100,
+              crossed200: !!scored.crossed200,
               totalScore: scored.totalScore,
               techScore: scored.techScore,
               momScore: scored.momScore,
