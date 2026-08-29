@@ -1252,22 +1252,27 @@ async function startScan(){
     // First try backend bulk scan for what it knows
     let backendResults=[];
     let regimeDisplay={regime:'NEUTRAL',label:'NEUTRAL',className:'regime-neutral',recommendation:'',niftyVal:'—',nifty5d:'—',niftySMA:'—',vix:'—',niftyPrice:0,vixPrice:0,cached:false,cacheAge:0};
-    try{
-      const resp=await fetch(API_BASE+'/api/scan',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({portfolioMode:activePortfolio,save:true}),
-        signal:makeTimeoutSignal(180000)
-      });
-      if(resp.ok){
-        const data=await resp.json();
-        if(data.success){
-          backendResults=data.results||[];
-          const rd=data.regime||{};
-          regimeDisplay={regime:rd.regime||'NEUTRAL',label:rd.regime||'NEUTRAL',className:'regime-'+(rd.regime||'neutral').toLowerCase().replace('_','-'),recommendation:rd.recommendation||'',niftyVal:rd.niftyVal||'—',nifty5d:rd.nifty5d||'—',niftySMA:rd.niftySMA||'—',vix:rd.vix||'—',niftyPrice:rd.niftyPrice||0,vixPrice:rd.vixPrice||0,cached:false,cacheAge:0};
+    // Retry the server scan before falling back to slow per-stock scanning.
+    for(let attempt=1;attempt<=3&&backendResults.length===0;attempt++){
+      try{
+        if(attempt>1)apiEl.textContent='Server busy — retrying ('+attempt+'/3)...';
+        const resp=await fetch(API_BASE+'/api/scan',{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({portfolioMode:activePortfolio,save:true}),
+          signal:makeTimeoutSignal(120000)
+        });
+        if(resp.ok){
+          const data=await resp.json();
+          if(data.success){
+            backendResults=data.results||[];
+            const rd=data.regime||{};
+            regimeDisplay={regime:rd.regime||'NEUTRAL',label:rd.regime||'NEUTRAL',className:'regime-'+(rd.regime||'neutral').toLowerCase().replace('_','-'),recommendation:rd.recommendation||'',niftyVal:rd.niftyVal||'—',nifty5d:rd.nifty5d||'—',niftySMA:rd.niftySMA||'—',vix:rd.vix||'—',niftyPrice:rd.niftyPrice||0,vixPrice:rd.vixPrice||0,cached:!!data.cached,cacheAge:data.cacheAgeSec||0};
+          }
         }
-      }
-    }catch(e){console.log('Backend scan partial:',e);}
+      }catch(e){console.log('Scan attempt '+attempt+' failed:',e);}
+      if(backendResults.length===0&&attempt<3)await sleep(4000);
+    }
 
     marketRegime=regimeDisplay.regime;
     renderRegimeBanner(regimeDisplay);
